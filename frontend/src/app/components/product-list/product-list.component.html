@@ -1,0 +1,55 @@
+<h1 style="text-align: center; font-weight: bold; margin-top: 100px;"> Styling Coiffure SO&CO - Product List Application</h1>
+
+<mat-card style="width: 80%; margin: auto; outline-color: rgb(184, 167, 204); outline-width: 2px; outline-style: solid">
+  <button
+    (click)="post(productInputName.value , productInputExtra.value ,
+    productInputPrice.value , productInputQuantity.value)"
+    mat-fab
+    color="primary"
+    style="float: right;"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+  <mat-form-field style ="width: 21%;">
+    <mat-label>Product name</mat-label>
+    <input #productInputName matInput placeholder="Ex. Shampoo" />
+  </mat-form-field>
+  <mat-form-field style ="width: 49%;">
+    <mat-label>Overview</mat-label>
+    <input #productInputExtra matInput placeholder="Ex. For fragile hair" />
+  </mat-form-field>
+  <mat-form-field style ="width: 10%;">
+    <mat-label>Product price</mat-label>
+    <input #productInputPrice matInput placeholder="Ex. 12.99" />
+  </mat-form-field>
+  <mat-form-field style ="width: 10%;">
+    <mat-label>Quantity available</mat-label>
+    <input #productInputQuantity matInput placeholder="Ex. 24" />
+  </mat-form-field>
+
+
+  <mat-list>
+    <mat-list-item *ngFor="let product of products$ | async">
+      <span style="font-weight: bold; width: 20%;"> {{ product.name }} </span>
+      <span style ="width: 50%;"> {{ product.extra }} </span>
+      <span style ="width: 10%;"> {{ product.price }} €</span>
+      <span style ="width: 10%;">Quantity:  {{ product.quantity }} </span>
+      <span style="position: absolute; right: 0;">
+        <button mat-icon-button>
+          <mat-icon
+            (click)="update(product.id, productInputName.value, productInputExtra.value,
+                            productInputPrice.value, productInputQuantity.value)"
+            color="primary"
+          >
+            edit
+          </mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon (click)="delete(product.id)" color="warn">
+            delete
+          </mat-icon>
+        </button>
+      </span>
+    </mat-list-item>
+  </mat-list>
+</mat-card>
